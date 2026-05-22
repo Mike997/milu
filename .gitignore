@@ -5,3 +5,14 @@ Thumbs.db
 node_modules/
 .vscode/
 *.tmp
+
+# Lambda build artifacts
+lambda/function.zip
+lambda/__pycache__/
+
+# AWS CLI scratch files (created during setup, not part of source)
+.lambda-*.json
+.dns-*.json
+.acm-*.json
+.cloudfront-*.json
+.route53-*.json
