@@ -155,19 +155,13 @@
       </p>
 
       <!--
-        SETUP NOTE for the form:
-        The form action below uses Formspree (https://formspree.io). To activate it:
-        1. Sign up at formspree.io (free tier covers 50 submissions/month)
-        2. Create a new form, point its delivery email to mike@milu.company
-        3. Copy the form ID Formspree gives you (an 8-character string)
-        4. Replace REPLACE_WITH_FORMSPREE_ID below
-        Alternative backends that also work with this form HTML:
-        - Web3Forms (https://web3forms.com) — change action URL only
-        - AWS Lambda Function URL + SES — change action URL only
-        - Netlify Forms (if site moves to Netlify) — add data-netlify="true"
+        Posts to an AWS Lambda function URL (eu-central-1). The Lambda
+        validates the fields, then sends the message via SES to the
+        address in the RECIPIENT env var (currently mike@milu.company).
+        CORS is locked to milu.company + local preview at localhost:8772.
       -->
       <form class="form-card fade fade-3"
-            action="https://formspree.io/f/REPLACE_WITH_FORMSPREE_ID"
+            action="https://w7jmcc4iolcyrxmeddaepermfi0wallj.lambda-url.eu-central-1.on.aws/"
             method="POST"
             id="contact-form">
 
@@ -196,8 +190,6 @@
           Don't fill this out if you're human: <input type="text" name="_gotcha" tabindex="-1" autocomplete="off">
         </label>
 
-        <!-- Tell Formspree which subject line to use in the email -->
-        <input type="hidden" name="_subject" value="MiLu contact form — new message">
 
         <div class="form-actions" style="justify-content: flex-end;">
           <button type="submit" class="btn">Send <span class="arrow">→</span></button>
@@ -226,10 +218,6 @@
     if (!form) return;
 
     form.addEventListener('submit', async function (e) {
-      // If action is still the placeholder, let the form submit normally so the
-      // user sees Formspree's "form not configured" page instead of a silent fail.
-      if (form.action.includes('REPLACE_WITH_FORMSPREE_ID')) return;
-
       e.preventDefault();
       statusEl.className = 'submit-status';
       statusEl.textContent = '';
@@ -240,23 +228,27 @@
       submitBtn.innerHTML = 'Sending…';
 
       try {
+        // Send as URL-encoded form data. The Lambda accepts both this and JSON.
+        const body = new URLSearchParams();
+        new FormData(form).forEach(function (value, key) { body.append(key, value); });
+
         const res = await fetch(form.action, {
           method: 'POST',
-          body: new FormData(form),
-          headers: { 'Accept': 'application/json' }
+          body: body,
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         });
-        if (res.ok) {
+        const data = await res.json().catch(function () { return {}; });
+        if (res.ok && data.ok) {
           statusEl.className = 'submit-status ok';
           statusEl.textContent = 'Thanks. Message sent. I’ll get back to you soon.';
           form.reset();
         } else {
-          const data = await res.json().catch(() => ({}));
           statusEl.className = 'submit-status error';
-          statusEl.textContent = (data && data.error) || 'Something went wrong. Please try again, or email me directly at mike@milu.company.';
+          statusEl.textContent = (data && data.error) || 'Something went wrong. Please try again in a moment.';
         }
       } catch (err) {
         statusEl.className = 'submit-status error';
-        statusEl.textContent = 'Could not reach the server. Please try again, or email me directly at mike@milu.company.';
+        statusEl.textContent = 'Could not reach the server. Please try again in a moment.';
       } finally {
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalLabel;

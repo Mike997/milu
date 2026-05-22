@@ -16,7 +16,8 @@ $excludes = @(
     '--exclude', '.claude/*',
     '--exclude', '.gitignore',
     '--exclude', '.DS_Store',
-    '--exclude', '*.swp'
+    '--exclude', '*.swp',
+    '--exclude', 'lambda/*'
 )
 
 Write-Host "Syncing $SourceDir -> s3://$Bucket ..." -ForegroundColor Cyan
