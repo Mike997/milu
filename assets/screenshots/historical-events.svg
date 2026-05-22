@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" role="img" aria-label="Historical Events: Sequence mode UI mockup. A new event 'Columbus reaches the Americas' must be placed on a timeline relative to '2003 Iraq War begins'.">
+  <defs>
+    <radialGradient id="he-bg" cx="50%" cy="40%" r="80%">
+      <stop offset="0%" stop-color="#1a1f3a"/>
+      <stop offset="100%" stop-color="#070a1a"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#he-bg)"/>
+  <g fill="#f5e8c8">
+    <circle cx="40" cy="30" r="0.8" opacity="0.7"/><circle cx="120" cy="60" r="1.2" opacity="0.8"/>
+    <circle cx="180" cy="40" r="0.6" opacity="0.6"/><circle cx="240" cy="80" r="0.9" opacity="0.7"/>
+    <circle cx="300" cy="50" r="0.7" opacity="0.7"/><circle cx="380" cy="70" r="0.5"/>
+    <circle cx="450" cy="40" r="0.8" opacity="0.6"/><circle cx="520" cy="80" r="0.6" opacity="0.8"/>
+    <circle cx="60" cy="200" r="0.7"/><circle cx="100" cy="280" r="0.9" opacity="0.7"/>
+    <circle cx="540" cy="200" r="0.8" opacity="0.8"/><circle cx="560" cy="280" r="0.6"/>
+    <circle cx="500" cy="360" r="0.7" opacity="0.7"/><circle cx="40" cy="370" r="0.9"/>
+    <circle cx="160" cy="400" r="0.6" opacity="0.6"/><circle cx="450" cy="410" r="0.7"/>
+    <circle cx="320" cy="400" r="0.6" opacity="0.7"/>
+  </g>
+  <text x="300" y="120" text-anchor="middle" font-family="Nunito, system-ui, sans-serif" font-weight="800" font-size="36" fill="#e8a020" style="filter: drop-shadow(0 0 16px rgba(232, 160, 32, 0.5));">HISTORICAL</text>
+  <text x="300" y="158" text-anchor="middle" font-family="Nunito, system-ui, sans-serif" font-weight="800" font-size="36" fill="#e8a020" style="filter: drop-shadow(0 0 16px rgba(232, 160, 32, 0.5));">EVENTS</text>
+  <text x="300" y="180" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="11" fill="#a89580" letter-spacing="1">created by Mike and Joey</text>
+  <g transform="translate(120 220)">
+    <rect x="0" y="0" width="360" height="76" rx="10" fill="#1a1530" stroke="#e8a020" stroke-width="2"/>
+    <text x="180" y="22" text-anchor="middle" font-family="Nunito, sans-serif" font-size="9" fill="#a89580" letter-spacing="2">NEW EVENT</text>
+    <text x="180" y="50" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="500" font-size="18" fill="#f5e8c8">Columbus reaches the Americas</text>
+    <text x="180" y="68" text-anchor="middle" font-family="Nunito, sans-serif" font-size="9" fill="#a89580">Tap a slot below to place it on the timeline.</text>
+  </g>
+  <g transform="translate(180 322)">
+    <rect x="0" y="0" width="72" height="72" rx="6" fill="none" stroke="#5a5070" stroke-width="1.5" stroke-dasharray="4,4"/>
+    <text x="36" y="46" text-anchor="middle" font-family="Nunito, sans-serif" font-size="22" fill="#5a5070">+</text>
+    <rect x="86" y="0" width="72" height="72" rx="6" fill="#1a1530" stroke="#5a5070" stroke-width="1"/>
+    <text x="122" y="26" text-anchor="middle" font-family="Nunito, sans-serif" font-weight="700" font-size="15" fill="#e8a020">2003</text>
+    <text x="122" y="46" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="9" fill="#f5e8c8">Iraq War</text>
+    <text x="122" y="56" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="9" fill="#f5e8c8">begins</text>
+    <circle cx="122" cy="80" r="2" fill="#e8a020"/>
+    <rect x="172" y="0" width="72" height="72" rx="6" fill="none" stroke="#5a5070" stroke-width="1.5" stroke-dasharray="4,4"/>
+    <text x="208" y="46" text-anchor="middle" font-family="Nunito, sans-serif" font-size="22" fill="#5a5070">+</text>
+  </g>
+  <text x="565" y="430" text-anchor="end" font-family="Nunito, sans-serif" font-weight="600" font-size="11" fill="#a89580" letter-spacing="2">SEQUENCE MODE</text>
+</svg>

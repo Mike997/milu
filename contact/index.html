@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contact — Drop Mike a note at MiLu</title>
+<meta name="description" content="Get in touch with MiLu. Send Mike a message about the games, press inquiries, or anything else. Replies usually within a few days.">
+<link rel="canonical" href="https://milu.company/contact/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contact — MiLu">
+<meta property="og:description" content="Drop me a note.">
+<meta property="og:url" content="https://milu.company/contact/">
+<meta property="og:site_name" content="MiLu">
+<meta name="twitter:card" content="summary">
+
+<meta name="theme-color" content="#f3e8d3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1a1410" media="(prefers-color-scheme: dark)">
+
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+
+<style>
+  /* Form styling tuned to the warm-paper aesthetic */
+  .form-card {
+    background: var(--paper-card);
+    border: 1px solid var(--ink-rule);
+    border-radius: 6px;
+    padding: clamp(24px, 4vw, 40px);
+    box-shadow: 0 2px 0 var(--paper-shade), 0 22px 44px -20px rgba(34, 25, 17, 0.35);
+    margin-top: 32px;
+  }
+  .field {
+    display: block;
+    margin-bottom: 22px;
+  }
+  .field label {
+    display: block;
+    font-family: var(--display);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ember-deep);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .field .req {
+    color: var(--rust);
+    margin-left: 4px;
+  }
+  .field input,
+  .field textarea {
+    width: 100%;
+    font-family: var(--body);
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--ink);
+    background: var(--paper-soft);
+    border: 1px solid var(--ink-rule);
+    border-radius: 4px;
+    padding: 12px 14px;
+    transition: border-color 180ms ease, background 180ms ease;
+  }
+  .field input:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--ember);
+    background: var(--paper-card);
+    box-shadow: 0 0 0 3px rgba(200, 112, 60, 0.15);
+  }
+  .field textarea {
+    min-height: 160px;
+    resize: vertical;
+    font-family: var(--body);
+  }
+  /* Honeypot — visually hidden but reachable to bots */
+  .honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+  .form-actions .fine {
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+  }
+  .btn[type="submit"] {
+    border: 1px solid var(--ink);
+    cursor: pointer;
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  .submit-status {
+    margin-top: 20px;
+    padding: 14px 16px;
+    border-radius: 4px;
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 0.95rem;
+    display: none;
+  }
+  .submit-status.ok {
+    background: rgba(90, 138, 94, 0.12);
+    border: 1px solid var(--ivy);
+    color: var(--ivy);
+    display: block;
+  }
+  .submit-status.error {
+    background: rgba(181, 55, 55, 0.1);
+    border: 1px solid var(--rust);
+    color: var(--rust);
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="wordmark" href="/" aria-label="MiLu — home">MiLu<span class="dot" aria-hidden="true"></span></a>
+    <nav class="nav" aria-label="Primary">
+      <a href="/#games">Games</a>
+      <a href="/about/">About</a>
+      <a href="/press/">Press</a>
+      <a href="/contact/" aria-current="page">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <article class="detail">
+    <div class="wrap-narrow" style="padding-top: 24px;">
+
+      <p class="eyebrow solo fade fade-1">Contact</p>
+      <h1 class="fade fade-2" style="font-style: italic; margin: 18px 0 18px;">Drop me a note.</h1>
+      <p class="lede fade fade-3">
+        Whether it's about the games, press, collaboration, or just a hello — write below.
+        I read everything personally. Replies usually come within a few days.
+      </p>
+
+      <!--
+        SETUP NOTE for the form:
+        The form action below uses Formspree (https://formspree.io). To activate it:
+        1. Sign up at formspree.io (free tier covers 50 submissions/month)
+        2. Create a new form, point its delivery email to mike@milu.company
+        3. Copy the form ID Formspree gives you (an 8-character string)
+        4. Replace REPLACE_WITH_FORMSPREE_ID below
+        Alternative backends that also work with this form HTML:
+        - Web3Forms (https://web3forms.com) — change action URL only
+        - AWS Lambda Function URL + SES — change action URL only
+        - Netlify Forms (if site moves to Netlify) — add data-netlify="true"
+      -->
+      <form class="form-card fade fade-3"
+            action="https://formspree.io/f/REPLACE_WITH_FORMSPREE_ID"
+            method="POST"
+            id="contact-form">
+
+        <label class="field">
+          <span>Your name <span class="req" aria-hidden="true">*</span></span>
+          <input type="text" name="name" required autocomplete="name" placeholder="What should I call you?">
+        </label>
+
+        <label class="field">
+          <span>Your email <span class="req" aria-hidden="true">*</span></span>
+          <input type="email" name="email" required autocomplete="email" placeholder="So I can reply">
+        </label>
+
+        <label class="field">
+          <span>Subject</span>
+          <input type="text" name="subject" placeholder="(optional)">
+        </label>
+
+        <label class="field">
+          <span>Message <span class="req" aria-hidden="true">*</span></span>
+          <textarea name="message" required placeholder="What's on your mind?"></textarea>
+        </label>
+
+        <!-- Honeypot — bots will fill this, real users won't see it -->
+        <label class="honeypot" aria-hidden="true">
+          Don't fill this out if you're human: <input type="text" name="_gotcha" tabindex="-1" autocomplete="off">
+        </label>
+
+        <!-- Tell Formspree which subject line to use in the email -->
+        <input type="hidden" name="_subject" value="MiLu contact form — new message">
+
+        <div class="form-actions" style="justify-content: flex-end;">
+          <button type="submit" class="btn">Send <span class="arrow">→</span></button>
+        </div>
+
+        <div id="submit-status" class="submit-status" role="status" aria-live="polite"></div>
+      </form>
+
+    </div>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="credit">© 2026 MiLu · By Mike Lundstrom, for the love of making games.</p>
+    <p class="ornament">— fin —</p>
+  </div>
+</footer>
+
+<script>
+  // Progressive enhancement — submit via fetch so we can show inline success/error
+  // and avoid the redirect to Formspree's confirmation page.
+  (function () {
+    const form = document.getElementById('contact-form');
+    const statusEl = document.getElementById('submit-status');
+    if (!form) return;
+
+    form.addEventListener('submit', async function (e) {
+      // If action is still the placeholder, let the form submit normally so the
+      // user sees Formspree's "form not configured" page instead of a silent fail.
+      if (form.action.includes('REPLACE_WITH_FORMSPREE_ID')) return;
+
+      e.preventDefault();
+      statusEl.className = 'submit-status';
+      statusEl.textContent = '';
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalLabel = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'Sending…';
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          statusEl.className = 'submit-status ok';
+          statusEl.textContent = 'Thanks. Message sent. I’ll get back to you soon.';
+          form.reset();
+        } else {
+          const data = await res.json().catch(() => ({}));
+          statusEl.className = 'submit-status error';
+          statusEl.textContent = (data && data.error) || 'Something went wrong. Please try again, or email me directly at mike@milu.company.';
+        }
+      } catch (err) {
+        statusEl.className = 'submit-status error';
+        statusEl.textContent = 'Could not reach the server. Please try again, or email me directly at mike@milu.company.';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalLabel;
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>

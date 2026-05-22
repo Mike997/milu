@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" role="img" aria-label="Town Detective gameplay: an unnamed aerial city view with a gold marker pin and the prompt 'where?'">
+  <defs>
+    <radialGradient id="td-bg" cx="50%" cy="55%" r="80%">
+      <stop offset="0%" stop-color="#152138"/>
+      <stop offset="100%" stop-color="#070a13"/>
+    </radialGradient>
+    <linearGradient id="td-water" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1d3050"/>
+      <stop offset="100%" stop-color="#0f1a30"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="450" fill="url(#td-bg)"/>
+  <path d="M 600 0 L 600 220 Q 540 220 510 200 Q 470 175 430 165 Q 380 155 350 130 Q 320 105 280 90 Q 240 70 200 60 L 600 0 Z" fill="url(#td-water)" opacity="0.75"/>
+  <path d="M 200 60 Q 240 70 280 90 Q 320 105 350 130 Q 380 155 430 165 Q 470 175 510 200 Q 540 220 600 220" fill="none" stroke="#c9a84c" stroke-width="0.6" opacity="0.5"/>
+  <path d="M 30 130 Q 110 170 160 220 Q 220 270 260 320 Q 300 370 350 410 Q 380 430 420 445" stroke="#2a4060" stroke-width="14" fill="none" opacity="0.7" stroke-linecap="round"/>
+  <path d="M 30 130 Q 110 170 160 220 Q 220 270 260 320 Q 300 370 350 410 Q 380 430 420 445" stroke="#3a5878" stroke-width="6" fill="none" opacity="0.55" stroke-linecap="round"/>
+  <g stroke="#c9a84c" opacity="0.55">
+    <line x1="40" y1="240" x2="350" y2="240" stroke-width="1.6"/>
+    <line x1="60" y1="320" x2="380" y2="320" stroke-width="1.4"/>
+    <line x1="220" y1="100" x2="220" y2="430" stroke-width="1.5"/>
+    <line x1="320" y1="120" x2="320" y2="430" stroke-width="1.4"/>
+  </g>
+  <g stroke="#c9a84c" stroke-width="0.45" opacity="0.4">
+    <line x1="40" y1="180" x2="180" y2="180"/><line x1="40" y1="210" x2="350" y2="210"/>
+    <line x1="40" y1="270" x2="380" y2="270"/><line x1="40" y1="300" x2="400" y2="300"/>
+    <line x1="40" y1="350" x2="420" y2="350"/><line x1="40" y1="380" x2="380" y2="380"/>
+    <line x1="60" y1="410" x2="350" y2="410"/><line x1="60" y1="135" x2="60" y2="430"/>
+    <line x1="100" y1="170" x2="100" y2="430"/><line x1="140" y1="195" x2="140" y2="430"/>
+    <line x1="180" y1="200" x2="180" y2="430"/><line x1="260" y1="120" x2="260" y2="430"/>
+    <line x1="360" y1="160" x2="360" y2="430"/><line x1="400" y1="210" x2="400" y2="380"/>
+  </g>
+  <g stroke="#c9a84c" stroke-width="0.7" opacity="0.5">
+    <line x1="60" y1="430" x2="320" y2="240"/>
+    <line x1="430" y1="240" x2="220" y2="430"/>
+  </g>
+  <g fill="#c9a84c" opacity="0.42">
+    <rect x="65" y="245" width="30" height="20"/><rect x="105" y="245" width="30" height="20"/>
+    <rect x="145" y="245" width="30" height="20"/><rect x="65" y="275" width="30" height="20"/>
+    <rect x="145" y="275" width="30" height="20"/><rect x="105" y="305" width="30" height="40"/>
+    <rect x="145" y="305" width="30" height="20"/><rect x="225" y="245" width="30" height="20"/>
+    <rect x="265" y="245" width="50" height="20"/><rect x="225" y="275" width="30" height="20"/>
+    <rect x="265" y="275" width="30" height="40"/><rect x="225" y="325" width="30" height="20"/>
+    <rect x="325" y="245" width="30" height="20"/><rect x="365" y="270" width="30" height="20"/>
+    <rect x="325" y="305" width="30" height="20"/><rect x="65" y="385" width="30" height="20"/>
+    <rect x="105" y="385" width="30" height="20"/>
+  </g>
+  <circle cx="200" cy="160" r="24" fill="#5a8a5e" opacity="0.25"/>
+  <circle cx="200" cy="160" r="24" fill="none" stroke="#5a8a5e" stroke-width="1" opacity="0.5"/>
+  <g transform="translate(260 270)">
+    <ellipse cx="0" cy="12" rx="10" ry="3" fill="#000" opacity="0.5"/>
+    <circle r="28" fill="#c9a84c" opacity="0.12"/>
+    <circle r="18" fill="#c9a84c" opacity="0.22"/>
+    <path d="M 0 -34 C -9 -34 -16 -28 -16 -19 C -16 -10 0 8 0 8 C 0 8 16 -10 16 -19 C 16 -28 9 -34 0 -34 Z" fill="#c9a84c" stroke="#5a4220" stroke-width="1"/>
+    <circle cx="0" cy="-19" r="5" fill="#f5e8c8"/>
+  </g>
+  <text x="60" y="105" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="32" fill="#c9a84c" opacity="0.45">where?</text>
+  <text x="570" y="425" text-anchor="end" font-family="Fraunces, Georgia, serif" font-style="italic" font-size="11" fill="#c9a84c" opacity="0.55" letter-spacing="2">— city unknown —</text>
+</svg>
