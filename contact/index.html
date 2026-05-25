@@ -23,6 +23,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/style.css">
 
+<!-- Cloudflare Turnstile widget. Replace data-sitekey on the widget div
+     below with a real key from dash.cloudflare.com/?to=/:account/turnstile.
+     Current value is Cloudflare's "always passes" test key. -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
 <style>
   /* Form styling tuned to the warm-paper aesthetic */
   .form-card {
@@ -125,6 +130,19 @@
     color: var(--rust);
     display: block;
   }
+  /* Turnstile widget sits between the message and the submit button */
+  .turnstile-row {
+    margin-bottom: 18px;
+    min-height: 65px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  /* Disable the submit button until Turnstile has produced a token */
+  button[type="submit"]:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none !important;
+  }
 </style>
 </head>
 <body>
@@ -191,9 +209,19 @@
           Don't fill this out if you're human: <input type="text" name="_gotcha" tabindex="-1" autocomplete="off">
         </label>
 
+        <!-- Cloudflare Turnstile widget. Site key below is Cloudflare's public
+             "always passes" test key. Swap for a real one once provisioned. -->
+        <div class="turnstile-row">
+          <div class="cf-turnstile"
+               data-sitekey="1x00000000000000000000AA"
+               data-theme="auto"
+               data-callback="onTurnstileSuccess"
+               data-error-callback="onTurnstileError"
+               data-expired-callback="onTurnstileExpired"></div>
+        </div>
 
         <div class="form-actions" style="justify-content: flex-end;">
-          <button type="submit" class="btn">Send <span class="arrow">→</span></button>
+          <button type="submit" id="submit-btn" class="btn" disabled>Send <span class="arrow">→</span></button>
         </div>
 
         <div id="submit-status" class="submit-status" role="status" aria-live="polite"></div>
@@ -211,8 +239,20 @@
 </footer>
 
 <script>
-  // Progressive enhancement — submit via fetch so we can show inline success/error
-  // and avoid the redirect to Formspree's confirmation page.
+  // Turnstile callbacks: keep the submit button disabled until we have a token.
+  // Defined at window scope because the Turnstile script calls them by name.
+  window.onTurnstileSuccess = function () {
+    var btn = document.getElementById('submit-btn');
+    if (btn) btn.disabled = false;
+  };
+  window.onTurnstileError = function () {
+    var btn = document.getElementById('submit-btn');
+    if (btn) btn.disabled = true;
+  };
+  window.onTurnstileExpired = window.onTurnstileError;
+
+  // Progressive enhancement: submit via fetch so we can show inline success/error
+  // without a full-page redirect.
   (function () {
     const form = document.getElementById('contact-form');
     const statusEl = document.getElementById('submit-status');
@@ -243,16 +283,21 @@
           statusEl.className = 'submit-status ok';
           statusEl.textContent = 'Thanks. Message sent. I’ll get back to you soon.';
           form.reset();
+          // Reset Turnstile so a fresh challenge gates the next submission.
+          if (window.turnstile) { try { window.turnstile.reset(); } catch (e) {} }
         } else {
           statusEl.className = 'submit-status error';
           statusEl.textContent = (data && data.error) || 'Something went wrong. Please try again in a moment.';
+          if (window.turnstile) { try { window.turnstile.reset(); } catch (e) {} }
         }
       } catch (err) {
         statusEl.className = 'submit-status error';
         statusEl.textContent = 'Could not reach the server. Please try again in a moment.';
+        if (window.turnstile) { try { window.turnstile.reset(); } catch (e) {} }
       } finally {
-        submitBtn.disabled = false;
+        // Button label restored; stays disabled until Turnstile produces a new token.
         submitBtn.innerHTML = originalLabel;
+        submitBtn.disabled = true;
       }
     });
   })();
