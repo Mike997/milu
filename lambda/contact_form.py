@@ -14,6 +14,8 @@ import json
 import logging
 import os
 import re
+import urllib.parse
+import urllib.request
 from urllib.parse import parse_qs
 
 import boto3
@@ -26,6 +28,8 @@ logger.setLevel(logging.INFO)
 REGION = os.environ.get("SES_REGION", "eu-central-1")
 SENDER = os.environ.get("SENDER", "contact@milu.company")
 RECIPIENT = os.environ.get("RECIPIENT", "mike@milu.company")
+TURNSTILE_SECRET = os.environ.get("CF_TURNSTILE_SECRET", "")
+TURNSTILE_VERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverify"
 
 ALLOWED_ORIGINS = {
     "https://milu.company",
@@ -42,6 +46,42 @@ MAX_MESSAGE_LEN = 5000
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 
 ses = boto3.client("ses", region_name=REGION)
+
+
+def _verify_turnstile(token: str, remote_ip: str = "") -> bool:
+    """Verify the Cloudflare Turnstile response token.
+
+    Returns True if the token is valid (or if no secret is configured, which
+    means Turnstile is intentionally bypassed for local dev). Returns False
+    on any failure: missing token, network error, or Cloudflare-reported
+    failure.
+    """
+    if not TURNSTILE_SECRET:
+        # Turnstile not configured. Allow the request through but log a warning.
+        logger.warning("CF_TURNSTILE_SECRET is empty; bot check is disabled.")
+        return True
+    if not token:
+        return False
+    payload = {"secret": TURNSTILE_SECRET, "response": token}
+    if remote_ip:
+        payload["remoteip"] = remote_ip
+    encoded = urllib.parse.urlencode(payload).encode("utf-8")
+    req = urllib.request.Request(
+        TURNSTILE_VERIFY_URL,
+        data=encoded,
+        method="POST",
+        headers={"Content-Type": "application/x-www-form-urlencoded"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+    except Exception:
+        logger.exception("Turnstile siteverify request failed")
+        return False
+    if not data.get("success"):
+        logger.warning("Turnstile rejected token: %s", data.get("error-codes"))
+        return False
+    return True
 
 
 def _cors_headers(origin: str) -> dict:
@@ -136,6 +176,16 @@ def lambda_handler(event, context):  # noqa: D401  AWS-required name
             # honeypot — pretend it worked
             return _response(200, {"ok": True}, origin)
         return _response(400, {"error": msg}, origin)
+
+    # Cloudflare Turnstile check
+    turnstile_token = fields.get("cf-turnstile-response", "")
+    remote_ip = ""
+    for k, v in (event.get("headers") or {}).items():
+        if k.lower() == "x-forwarded-for":
+            remote_ip = (v or "").split(",")[0].strip()
+            break
+    if not _verify_turnstile(turnstile_token, remote_ip):
+        return _response(400, {"error": "Bot check failed. Please reload and try again."}, origin)
 
     name = fields["name"].strip()
     sender_email = fields["email"].strip()
