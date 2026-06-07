@@ -9,7 +9,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Contact — MiLu">
-<meta property="og:description" content="Drop me a note.">
+<meta property="og:description" content="Send us a note.">
 <meta property="og:url" content="https://milu.company/contact/">
 <meta property="og:site_name" content="MiLu">
 <meta name="twitter:card" content="summary">
@@ -166,9 +166,9 @@
     <div class="wrap-narrow" style="padding-top: 24px;">
 
       <p class="eyebrow solo fade fade-1">Contact</p>
-      <h1 class="fade fade-2" style="font-style: italic; margin: 18px 0 18px;">Drop me a note.</h1>
+      <h1 class="fade fade-2" style="font-style: italic; margin: 18px 0 18px;">Send us a note.</h1>
       <p class="lede fade fade-3">
-        Write about the games, press, collaboration, or just say hi. I read everything personally.
+        Write about the games, press, collaboration, or just say hi. We read everything.
         Replies usually come within a few days.
       </p>
 
@@ -186,12 +186,12 @@
 
         <label class="field">
           <span>Your name <span class="req" aria-hidden="true">*</span></span>
-          <input type="text" name="name" required autocomplete="name" placeholder="What should I call you?">
+          <input type="text" name="name" required autocomplete="name" placeholder="What should we call you?">
         </label>
 
         <label class="field">
           <span>Your email <span class="req" aria-hidden="true">*</span></span>
-          <input type="email" name="email" required autocomplete="email" placeholder="So I can reply">
+          <input type="email" name="email" required autocomplete="email" placeholder="So we can reply">
         </label>
 
         <label class="field">
@@ -233,7 +233,7 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <p class="credit">© 2026 MiLu · By Mike Lundstrom, for the love of making games.</p>
+    <p class="credit">© 2026 MiLu · made for the love of games.</p>
     <p class="ornament">— fin —</p>
   </div>
 </footer>
@@ -281,7 +281,7 @@
         const data = await res.json().catch(function () { return {}; });
         if (res.ok && data.ok) {
           statusEl.className = 'submit-status ok';
-          statusEl.textContent = 'Thanks. Message sent. I’ll get back to you soon.';
+          statusEl.textContent = 'Thanks. Message sent. We’ll get back to you soon.';
           form.reset();
           // Reset Turnstile so a fresh challenge gates the next submission.
           if (window.turnstile) { try { window.turnstile.reset(); } catch (e) {} }
