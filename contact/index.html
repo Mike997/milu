@@ -186,12 +186,12 @@
 
         <label class="field">
           <span>Your name <span class="req" aria-hidden="true">*</span></span>
-          <input type="text" name="name" required autocomplete="name" placeholder="What should I call you?">
+          <input type="text" name="name" required autocomplete="name" placeholder="What should we call you?">
         </label>
 
         <label class="field">
           <span>Your email <span class="req" aria-hidden="true">*</span></span>
-          <input type="email" name="email" required autocomplete="email" placeholder="So I can reply">
+          <input type="email" name="email" required autocomplete="email" placeholder="So we can reply">
         </label>
 
         <label class="field">
@@ -281,7 +281,7 @@
         const data = await res.json().catch(function () { return {}; });
         if (res.ok && data.ok) {
           statusEl.className = 'submit-status ok';
-          statusEl.textContent = 'Thanks. Message sent. I’ll get back to you soon.';
+          statusEl.textContent = 'Thanks. Message sent. We’ll get back to you soon.';
           form.reset();
           // Reset Turnstile so a fresh challenge gates the next submission.
           if (window.turnstile) { try { window.turnstile.reset(); } catch (e) {} }
